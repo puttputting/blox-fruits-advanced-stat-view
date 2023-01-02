@@ -1,0 +1,54 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({IntroEnabled = false, Name = "Blox Fruits | ADV Stats View", HidePremium = false, SaveConfig = false, ConfigFolder = "aaaa"})
+
+local Tab = Window:MakeTab({
+	Name = "General",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local TS = Tab:AddSection({
+	Name = "All Main functions beign here."
+})
+
+Tab:AddTextbox({
+	Name = "Get Player Level (Input Username, No Display)",
+	Default = game.Players.LocalPlayer.Name,
+	TextDisappear = true,
+	Callback = function(Value)
+		_G.V = Value
+    OrionLib:MakeNotification({
+	Name = "Player Level Is :",
+	Content = game:GetService("Players"):FindFirstChild(_G.V).Data.Level.Value,
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+	end	  
+})
+
+Tab:AddButton({
+	Name = "See you're actual bounty.",
+	Callback = function()
+    OrionLib:MakeNotification({
+	Name = "You're actuall bounty is",
+	Content = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].Value,
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+  	end    
+})
+
+Tab:AddToggle({
+	Name = "Inf ObverstantionHaki View",
+	Default = false,
+	Callback = function(Value)
+        local bv = game:GetService("Players").LocalPlayer.VisionRadius.Value
+        _G.OldValue = bv
+        _G.Toggle = Value
+        if _G.Toggle == true then
+            game:GetService("Players").LocalPlayer.VisionRadius.Value = 2839423
+        else
+            game:GetService("Players").LocalPlayer.VisionRadius.Value = _G.OldValue
+        end
+	end    
+})
